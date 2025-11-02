@@ -25,3 +25,10 @@ or begin
     ssh-add ~/.ssh/id_ed25519_github_perso
     ssh-add ~/.ssh/id_rsa_server
 end
+
+# pnpm
+set -gx PNPM_HOME "/home/cletus/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end

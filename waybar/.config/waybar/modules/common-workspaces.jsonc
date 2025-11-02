@@ -2,14 +2,15 @@
   "hyprland/workspaces": {
     "format": "{icon} ",
     "format-icons": {
-      "1": "\ueb01",
-      "2": "\uF121",
-      "3": "\uF120",
+      "1": "\uF121",
+      "2": "\uF120",
+      "3": "\ueb01",
       "4": "\uea83",
       "5": "\udb83\udede",
-      "6": "\ueb01",
+      "6": "\uea83",
       "7": "\ueb01",
-      "8": "\uF1BC"
+      "8": "\ueb01",
+      "9": "\uF1BC"
     }
   }
 }
