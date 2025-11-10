@@ -1,0 +1,249 @@
+#!/usr/bin/env bash
+
+# cl3ctl - Personal management tool
+# Usage: cl3ctl <command> [options]
+
+set -e
+
+SCRIPT_NAME="cl3ctl"
+VERSION="1.0.0"
+
+# Check if gum is installed
+if ! command -v gum &> /dev/null; then
+  echo "Error: gum is not installed. Please install it first."
+  echo "  brew install gum"
+  exit 1
+fi
+
+# Display functions using gum
+error() {
+  gum style --foreground 196 "✗ $1"
+}
+
+success() {
+  gum style --foreground 46 "✓ $1"
+}
+
+info() {
+  gum style --foreground 33 "ℹ $1"
+}
+
+warning() {
+  gum style --foreground 214 "⚠ $1"
+}
+
+# Show help
+show_help() {
+  gum style \
+    --border double \
+    --border-foreground 212 \
+    --padding "1 2" \
+    --margin "1 0" \
+    "${SCRIPT_NAME} v${VERSION}" \
+    "" \
+    "Usage: ${SCRIPT_NAME} <command> [options]" \
+    "" \
+    "Available commands:" \
+    "  generate-ssh-key    Generate a new SSH key with your Git email" \
+    "  help                Show this help" \
+    "  version             Show version" \
+    "" \
+    "Examples:" \
+    "  ${SCRIPT_NAME} generate-ssh-key" \
+    "  ${SCRIPT_NAME} generate-ssh-key --name my-key" \
+    "  ${SCRIPT_NAME} generate-ssh-key --email custom@example.com"
+}
+
+# Generate SSH key
+generate_ssh_key() {
+  local email=""
+  local key_name=""
+  local key_type=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      --email)
+        email="$2"
+        shift 2
+        ;;
+      --name)
+        key_name="$2"
+        shift 2
+        ;;
+      --type)
+        key_type="$2"
+        shift 2
+        ;;
+      -h|--help)
+        gum style \
+          --border normal \
+          --border-foreground 33 \
+          --padding "1 2" \
+          "Usage: ${SCRIPT_NAME} generate-ssh-key [options]" \
+          "" \
+          "Options:" \
+          "  --email <email>     Email to use (default: Git email)" \
+          "  --name <name>       Key file name (default: id_<type>)" \
+          "  --type <type>       Key type (default: interactive)" \
+          "  -h, --help          Show this help"
+        return 0
+        ;;
+      *)
+        error "Unknown option: $1"
+        return 1
+        ;;
+    esac
+  done
+
+  echo
+  gum style \
+    --foreground 212 \
+    --bold \
+    "SSH Key Generator"
+  echo
+
+  # Get email from Git if not provided
+  if [ -z "$email" ]; then
+    local git_email=$(git config user.email 2>/dev/null)
+    if [ -n "$git_email" ]; then
+      email=$(gum input --placeholder "Email" --value "$git_email" --prompt "✉ ")
+    else
+      email=$(gum input --placeholder "Enter your email" --prompt "✉ ")
+    fi
+
+    if [ -z "$email" ]; then
+      error "Email is required"
+      return 1
+    fi
+  fi
+
+  # Select key type if not provided
+  if [ -z "$key_type" ]; then
+    key_type=$(gum choose --header "Select key type:" "ed25519" "rsa")
+  fi
+
+  # Get key name if not provided
+  if [ -z "$key_name" ]; then
+    local default_name="id_${key_type}"
+    key_name=$(gum input --placeholder "Key name" --value "$default_name" --prompt "🔑 ")
+    if [ -z "$key_name" ]; then
+      key_name="$default_name"
+    fi
+  fi
+
+  local ssh_dir="$HOME/dev/test-ssh"
+  local key_path="$ssh_dir/$key_name"
+
+  # Create .ssh directory if it doesn't exist
+  if [ ! -d "$ssh_dir" ]; then
+    mkdir -p "$ssh_dir"
+    chmod 700 "$ssh_dir"
+  fi
+
+  # Check if key already exists
+  if [ -f "$key_path" ]; then
+    echo
+    warning "A key already exists at $key_path"
+    gum confirm "Do you want to replace it?" || {
+      info "Operation cancelled"
+      return 0
+    }
+  fi
+
+  # Generate SSH key
+  echo
+  gum spin --spinner dot --title "Generating SSH key..." -- \
+    ssh-keygen -t "$key_type" -C "$email" -f "$key_path" -N "" >/dev/null 2>&1
+
+  if [ $? -eq 0 ]; then
+    echo
+    success "SSH key generated successfully!"
+    echo
+
+    # Display key information
+    gum style \
+      --foreground 33 \
+      --margin "1 0" \
+      "Private key: $key_path" \
+      "Public key:  $key_path.pub"
+
+    echo
+
+    # Display public key in a nice box
+    gum style \
+      --border double \
+      --border-foreground 46 \
+      --padding "1 2" \
+      --margin "1 0" \
+      "Public Key (add to GitHub, GitLab, etc.)" \
+      "" \
+      "$(cat $key_path.pub)"
+
+    # Copy to clipboard based on available command
+    local clipboard_cmd=""
+    if command -v pbcopy &> /dev/null; then
+      # macOS
+      clipboard_cmd="pbcopy"
+    elif command -v wl-copy &> /dev/null; then
+      # Wayland (Linux)
+      clipboard_cmd="wl-copy"
+    elif command -v xclip &> /dev/null; then
+      # X11 (Linux)
+      clipboard_cmd="xclip -selection clipboard"
+    fi
+
+    if [ -n "$clipboard_cmd" ]; then
+      cat "$key_path.pub" | $clipboard_cmd
+      echo
+      success "Public key copied to clipboard!"
+    else
+      echo
+      warning "No clipboard utility found (pbcopy, wl-copy, or xclip)"
+      info "Please install one to enable clipboard support"
+    fi
+
+    # Show next steps
+    echo
+    gum style \
+      --foreground 33 \
+      --italic \
+      "To add the key to your ssh-agent:" \
+      "  ssh-add $key_path"
+    echo
+  else
+    error "Failed to generate SSH key"
+    return 1
+  fi
+}
+
+# Main entry point
+main() {
+  if [ $# -eq 0 ]; then
+    error "No command specified"
+    echo
+    show_help
+    exit 1
+  fi
+
+  case "$1" in
+    generate-ssh-key)
+      shift
+      generate_ssh_key "$@"
+      ;;
+    help|--help|-h)
+      show_help
+      ;;
+    version|--version|-v)
+      gum style --foreground 212 "${SCRIPT_NAME} v${VERSION}"
+      ;;
+    *)
+      error "Unknown command: $1"
+      echo
+      show_help
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
