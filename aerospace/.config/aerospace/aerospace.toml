@@ -64,7 +64,7 @@ automatically-unhide-macos-hidden-apps = false
     inner.vertical =   10
     outer.left =       10
     outer.bottom =     10
-    outer.top =        [{ monitor.main = 40}, { monitor."Acer VG240Y"  = 40 }, 10]
+    outer.top =        [{ monitor.main = 10}, { monitor."Acer VG240Y"  = 40 }, 10]
     outer.right =      10
 
 # 'main' binding mode declaration
@@ -160,6 +160,10 @@ automatically-unhide-macos-hidden-apps = false
 
 [[on-window-detected]]
     if.app-id = 'com.apple.finder'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.Preview'
     run = 'layout floating'
 
 [[on-window-detected]]
