@@ -10,6 +10,7 @@
       "group/tray-expander",
       "custom/notifications",
       "custom/volume",
+      "custom/mic",
       "custom/updates",
       "custom/shutdown"
     ],
@@ -23,7 +24,8 @@
       "~/.config/waybar/modules/common-updates.jsonc",
       "~/.config/waybar/modules/common-bluetooth.jsonc",
       "~/.config/waybar/modules/common-disk.jsonc",
-      "~/.config/waybar/modules/custom-temp.jsonc"
+      "~/.config/waybar/modules/custom-temp.jsonc",
+      "~/.config/waybar/modules/custom-mic.jsonc"
     ],
     "tray": {
       // "icon-size": 21,

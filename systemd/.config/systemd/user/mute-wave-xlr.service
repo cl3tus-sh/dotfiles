@@ -1,0 +1,10 @@
+[Unit]
+Description=Mute Wave XLR input on startup
+After=pipewire.service pipewire-pulse.service
+
+[Service]
+Type=oneshot
+ExecStart=/home/cletus/.local/bin/mute-wave-xlr.sh
+
+[Install]
+WantedBy=default.target

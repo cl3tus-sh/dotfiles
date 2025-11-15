@@ -1,0 +1,14 @@
+{
+  "custom/mic": {
+    "exec": "~/.local/bin/wave-xlr-status.sh",
+    "return-type": "json",
+    "interval": 1,
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "unmuted": "󰍬",
+      "muted": "󰍭"
+    },
+    "on-click": "~/.local/bin/wave-xlr-toggle.sh"
+  }
+}
