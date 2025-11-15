@@ -1,0 +1,28 @@
+{
+  "group/tray-expander": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 600,
+      "children-class": "tray-group-item",
+      "click-to-reveal": false,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/expand-icon",
+      "bluetooth",
+      "disk",
+      "custom/temps",
+      "network"
+    ]
+  },
+
+  "custom/expand-icon": {
+    "format": "󰁎",
+    "tooltip": false
+  },
+
+  "tray": {
+    "icon-size": 12,
+    "spacing": 17
+  }
+}

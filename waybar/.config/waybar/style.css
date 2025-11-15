@@ -33,13 +33,23 @@ window#waybar {
 #custom-shutdown,
 #common-bluetooth,
 #custom-todo,
-#custom-temps {
+#custom-temps,
+#custom-expand-icon {
   background: @bg;
   color: @textActive;
   border-radius: 8px;
   opacity: 1;
   margin: 0px 2px 0px 2px;
   padding: 4px 8px 4px 8px;
+}
+
+#custom-expand-icon {
+  margin-left: 0;
+}
+
+#tray-expander {
+  background-color: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
 }
 
 .modules-left,

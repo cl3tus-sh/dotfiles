@@ -7,25 +7,21 @@
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": [
+      "group/tray-expander",
       "custom/notifications",
-      "bluetooth",
-      "custom/updates",
-      "disk",
-      "custom/temps",
       "custom/volume",
-      "network",
-      "custom/shutdown",
-      "bluetooth"
-      // "tray"
+      "custom/updates",
+      "custom/shutdown"
     ],
     "include": [
       "~/.config/waybar/modules/common-workspaces.jsonc",
       "~/.config/waybar/modules/common-clock.jsonc",
-      "~/.config/waybar/modules/common-bluetooth.jsonc",
+      "~/.config/waybar/modules/group-tray-expander.jsonc",
       "~/.config/waybar/modules/custom-volume.jsonc",
       "~/.config/waybar/modules/common-media.jsonc",
       "~/.config/waybar/modules/common-notification.jsonc",
       "~/.config/waybar/modules/common-updates.jsonc",
+      "~/.config/waybar/modules/common-bluetooth.jsonc",
       "~/.config/waybar/modules/common-disk.jsonc",
       "~/.config/waybar/modules/custom-temp.jsonc"
     ],
