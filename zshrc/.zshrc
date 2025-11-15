@@ -9,13 +9,12 @@ export PATH="/usr/local/bin:$PATH"
 ZSH_THEME="robbyrussell"
 
 plugins=(
-  aliases
   zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
 
-alias alias="als"
 alias dev="cd ~/dev"
 alias reload="source ~/.zshrc"
 alias ports='sudo lsof -i -P -n | grep LISTEN'
@@ -27,10 +26,15 @@ alias myip="curl -s http://checkip.dyndns.org/ | sed 's/[a-zA-Z<>/ :]//g'"
 alias path='echo; tr ":" "\n" <<< "$PATH"; echo;'
 
 # NVM custom dans ~/.config/nvm
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+export NVM_DIR="$HOME/.nvm"
+[[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && . "$NVM_DIR/bash_completion"
 
 # Starship prompt
 eval "$(starship init zsh)"
 export PATH="$HOME/.local/bin:$PATH"
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/cletus/.dart-cli-completion/zsh-config.zsh ]] && . /home/cletus/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+

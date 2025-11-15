@@ -5,14 +5,12 @@
     // Center (DP-1)
     "output": "DP-1",
     "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock", "custom/pomodoro"],
+    "modules-center": ["clock"],
     "modules-right": [
       "custom/notifications",
-      "custom/backup",
       "custom/updates",
       "custom/diskfree",
-      "pulseaudio",
-      "mpd",
+      "custom/volume",
       "network",
       "custom/shutdown"
       // "tray"
@@ -20,15 +18,11 @@
     "include": [
       "~/.config/waybar/modules/common-workspaces.jsonc",
       "~/.config/waybar/modules/common-clock.jsonc",
-      "~/.config/waybar/modules/common-mpd.jsonc",
-      "~/.config/waybar/modules/common-pulseaudio.jsonc",
+      "~/.config/waybar/modules/custom-volume.jsonc",
       "~/.config/waybar/modules/common-media.jsonc",
       "~/.config/waybar/modules/common-notification.jsonc",
-      "~/.config/waybar/modules/common-backup.jsonc",
       "~/.config/waybar/modules/common-updates.jsonc",
-      "~/.config/waybar/modules/common-diskfree.jsonc",
-      "~/.config/waybar/modules/common-backup.jsonc",
-      "~/.config/waybar/modules/common-pomodoro.jsonc"
+      "~/.config/waybar/modules/common-diskfree.jsonc"
     ],
     "tray": {
       // "icon-size": 21,
@@ -58,11 +52,11 @@
       "custom/media"
     ],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio"],
+    "modules-right": ["custom/volume"],
     "include": [
       "~/.config/waybar/modules/common-workspaces.jsonc",
       "~/.config/waybar/modules/common-clock.jsonc",
-      "~/.config/waybar/modules/common-pulseaudio.jsonc",
+      "~/.config/waybar/modules/custom-volume.jsonc",
       "~/.config/waybar/modules/common-media.jsonc"
     ]
   }

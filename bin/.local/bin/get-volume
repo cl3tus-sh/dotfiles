@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+VOL=$(pamixer --get-volume)
+MUTE=$(pamixer --get-mute)
+
+if [ "$MUTE" = "true" ]; then
+    ICON="muted"
+else
+    ICON="normal"
+fi
+
+# RENVOI JSON STRICT
+printf '{"alt":"%s","text":" %s", "class":"%s"}' "$ICON" "$VOL" "$ICON"

@@ -29,6 +29,8 @@ window#waybar {
 #custom-diskfree,
 #custom-backup,
 #custom-pomodoro,
+#custom-volume,
+#custom-shutdown,
 #custom-todo {
   background: @bg;
   color: @textActive;
@@ -149,4 +151,12 @@ window#waybar {
 #custom-pomodoro.done {
   background-color: #a6e3a1;
   color: #11111b;
+}
+
+/* -----------------------------------------------------
+ * Custom volumes
+ * ----------------------------------------------------- */
+#custom-volume.muted {
+  background-color: #f38ba8;
+  color: #181825;
 }

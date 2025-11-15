@@ -49,7 +49,7 @@ nohup hyprpaper >/dev/null 2>&1 &
 # --- Update Hyprlock config (only background path) ---
 HYPRLOCK_CFG="$HOME/.config/hypr/hyprlock.conf"
 if [ -f "$HYPRLOCK_CFG" ]; then
-  sed -i "s|^\s*path = .*|    path = $WP_BLUR|" "$HYPRLOCK_CFG"
+  sed -i "/background {/,/}/ s|path = .*|    path = $WP_BLUR|" "$HYPRLOCK_CFG"
 fi
 
 # Notify user

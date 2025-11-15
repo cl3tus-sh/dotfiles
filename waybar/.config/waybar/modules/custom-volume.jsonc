@@ -1,0 +1,19 @@
+{
+  "custom/volume": {
+    "exec": "~/.local/bin/get-volume",
+    "return-type": "json",
+    "interval": 1,
+    "tooltip": false,
+
+    "format": "{icon} {text}%",
+    "format-icons": {
+      "normal": "",
+      "muted": ""
+    },
+
+    "on-click": "pamixer --toggle-mute; kill -RTMIN+1 $(pidof waybar)",
+    "on-scroll-up": "pamixer --increase 5; kill -RTMIN+1 $(pidof waybar)",
+    "on-scroll-down": "pamixer --decrease 5; kill -RTMIN+1 $(pidof waybar)",
+    "on-click-right": "kitty --title 'window-float' wiremix"
+  }
+}

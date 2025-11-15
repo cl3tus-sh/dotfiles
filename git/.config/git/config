@@ -1,0 +1,9 @@
+[user]
+    name = Cl3tus
+    email = osternaud.clement@pm.me
+
+[core]
+    editor = nvim
+
+[color]
+    ui = auto

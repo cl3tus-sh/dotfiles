@@ -1,0 +1,17 @@
+theme = catppuccin-mocha.conf
+
+# Font
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 14
+font-feature = +liga, +calt  # enable ligatures
+
+# Padding around text
+window-padding-x = 6
+window-padding-y = 4
+
+# Transparency / blur
+background-opacity = 0.9
+background-blur = 100
+
+# Hide titlebar for a cleaner look
+gtk-titlebar = false
