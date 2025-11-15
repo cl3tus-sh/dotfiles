@@ -10,6 +10,7 @@
       "group/tray-expander",
       "custom/notifications",
       "custom/volume",
+      "custom/airpods",
       "custom/mic",
       "custom/updates",
       "custom/shutdown"
@@ -25,6 +26,7 @@
       "~/.config/waybar/modules/common-bluetooth.jsonc",
       "~/.config/waybar/modules/common-disk.jsonc",
       "~/.config/waybar/modules/custom-temp.jsonc",
+      "~/.config/waybar/modules/custom-airpods.jsonc",
       "~/.config/waybar/modules/custom-mic.jsonc"
     ],
     "tray": {
