@@ -8,21 +8,26 @@
     "modules-center": ["clock"],
     "modules-right": [
       "custom/notifications",
+      "bluetooth",
       "custom/updates",
-      "custom/diskfree",
+      "disk",
+      "custom/temps",
       "custom/volume",
       "network",
-      "custom/shutdown"
+      "custom/shutdown",
+      "bluetooth"
       // "tray"
     ],
     "include": [
       "~/.config/waybar/modules/common-workspaces.jsonc",
       "~/.config/waybar/modules/common-clock.jsonc",
+      "~/.config/waybar/modules/common-bluetooth.jsonc",
       "~/.config/waybar/modules/custom-volume.jsonc",
       "~/.config/waybar/modules/common-media.jsonc",
       "~/.config/waybar/modules/common-notification.jsonc",
       "~/.config/waybar/modules/common-updates.jsonc",
-      "~/.config/waybar/modules/common-diskfree.jsonc"
+      "~/.config/waybar/modules/common-disk.jsonc",
+      "~/.config/waybar/modules/custom-temp.jsonc"
     ],
     "tray": {
       // "icon-size": 21,
@@ -49,7 +54,8 @@
       "custom/media-prev",
       "custom/media-playpause",
       "custom/media-next",
-      "custom/media"
+      "custom/media-info",
+      "custom/spotify-launcher"
     ],
     "modules-center": ["clock"],
     "modules-right": ["custom/volume"],

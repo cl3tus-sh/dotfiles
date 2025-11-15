@@ -26,12 +26,14 @@ window#waybar {
 #custom-power,
 #taskbar,
 #custom-updates,
-#custom-diskfree,
+#disk,
 #custom-backup,
 #custom-pomodoro,
 #custom-volume,
 #custom-shutdown,
-#custom-todo {
+#common-bluetooth,
+#custom-todo,
+#custom-temps {
   background: @bg;
   color: @textActive;
   border-radius: 8px;
@@ -159,4 +161,61 @@ window#waybar {
 #custom-volume.muted {
   background-color: #f38ba8;
   color: #181825;
+}
+
+/* -----------------------------------------------------
+* Custom Media
+* ----------------------------------------------------- */
+#custom-media-prev {
+  margin-left: 4px;
+}
+
+/* Fond commun + bordure fusionnée */
+#custom-spotify-launcher,
+#custom-media-prev,
+#custom-media-playpause,
+#custom-media-next,
+#custom-media-info {
+  background: @bg;
+  color: alpha(@foreground, 0.9);
+  padding: 6px 10px;
+  font-weight: 500;
+  border: 1px solid shade(@bg, 0.4);
+  border-radius: 0;
+}
+
+/* Supprime la bordure interne entre chaque module */
+#custom-media-playpause,
+#custom-media-next,
+#custom-media-prev {
+  border-left: none;
+  padding: 6px 2px;
+}
+
+/* Coins arrondis aux extrémités */
+#custom-media-prev {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+#custom-spotify-launcher,
+#custom-media-info {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Survol fluide */
+#custom-media-prev:hover,
+#custom-media-playpause:hover,
+#custom-media-next:hover,
+#custom-media-info:hover {
+  background: shade(@bg, 0.35);
+}
+
+/* Boutons plus compacts */
+#custom-media-prev,
+#custom-media-playpause,
+#custom-media-next {
+  font-size: 13px;
+  min-width: 24px;
 }

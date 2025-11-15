@@ -1,9 +1,0 @@
-{
-  "custom/diskfree": {
-    "format": " {}",
-    "return-type": "json",
-    "exec": "~/.config/cletus/scripts/diskfree.sh",
-    "interval": 60,
-    "on-click": "kitty btop"
-  }
-}

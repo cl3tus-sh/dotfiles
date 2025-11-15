@@ -1,6 +1,6 @@
 {
   // 🎵 Song Title (centered)
-  "custom/media": {
+  "custom/media-info": {
     "format": "{0}",
     "tooltip": false,
     "justify": "center",
@@ -10,24 +10,24 @@
       "default": "\uF001"
     },
     "escape": true,
-    "exec": "~/.config/waybar/music.sh --title",
-    "interval": 10,
-    "on-click": "hyprctl dispatch workspace 8"
+    "exec": "~/.config/waybar/scripts/music.sh --title",
+    "interval": 1,
+    "on-click": "hyprctl dispatch workspace 9"
   },
 
   // ⏮ Previous Button
   "custom/media-prev": {
     "format": "",
     "tooltip": "Previous",
-    "on-click": "~/.config/waybar/music.sh --prev",
+    "on-click": "~/.config/waybar/scripts/music.sh --prev",
     "interval": "once"
   },
 
   // ⏯ Play/Pause Button
   "custom/media-playpause": {
     "format": "{}",
-    "exec": "~/.config/waybar/music.sh --icon",
-    "on-click": "~/.config/waybar/music.sh --toggle",
+    "exec": "~/.config/waybar/scripts/music.sh --icon",
+    "on-click": "~/.config/waybar/scripts/music.sh --toggle",
     "interval": 1,
     "tooltip": false
   },
@@ -36,7 +36,15 @@
   "custom/media-next": {
     "format": "",
     "tooltip": "Next",
-    "on-click": "~/.config/waybar/music.sh --next",
+    "on-click": "~/.config/waybar/scripts/music.sh --next",
     "interval": "once"
+  },
+
+  "custom/spotify-launcher": {
+    "format": "",
+    "tooltip": "Ouvrir Spotify",
+    "on-click": "spotify &",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/spotify-status.sh"
   }
 }

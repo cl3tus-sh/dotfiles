@@ -1,0 +1,16 @@
+{
+  "custom/temps": {
+    "exec": "~/.config/waybar/scripts/temps.sh",
+    "return-type": "json",
+    "interval": 2,
+
+    "format": "{icon} {text}°C",
+    "format-icons": {
+      "gpu": "",
+      "cpu": ""
+    },
+
+    "on-click": "~/.config/waybar/scripts/temps.sh toggle",
+    "tooltip": false
+  }
+}

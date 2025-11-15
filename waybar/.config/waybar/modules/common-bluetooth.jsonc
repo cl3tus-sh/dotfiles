@@ -1,0 +1,7 @@
+{
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": " off",
+    "on-click": "kitty --title 'window-float' -e bluetuith"
+  }
+}
