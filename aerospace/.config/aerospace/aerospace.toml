@@ -64,7 +64,7 @@ automatically-unhide-macos-hidden-apps = false
     inner.vertical =   10
     outer.left =       10
     outer.bottom =     10
-    outer.top =        [{ monitor.main = 10}, { monitor."Acer VG240Y"  = 40 }, 10]
+    outer.top =        [{ monitor.main = 40}, { monitor."Acer VG240Y"  = 40 }, 10]
     outer.right =      10
 
 # 'main' binding mode declaration
@@ -153,7 +153,7 @@ automatically-unhide-macos-hidden-apps = false
     3 = 'main' # Browser
     4 = 'main'
     5 = 'main'
-    6 = 'main'
+    6 = 'secondary'
     7 = 'secondary' # chat
     8 = 'secondary'
     9 = 'secondary' # Music

@@ -1,25 +1,25 @@
 #!/bin/bash
 
-# Color Palette
-export BLACK=0xff181926
-export WHITE=0xffcad3f5
-export RED=0xffed8796
-export GREEN=0xffa6da95
-export BLUE=0xff8aadf4
-export YELLOW=0xffeed49f
-export ORANGE=0xfff5a97f
-export MAGENTA=0xffc6a0f6
-export GREY=0xff939ab7
-export TRANSPARENT=0x00000000
+# Base colors inspired by Waybar config
+export WHITE=0xffffffff
+export FOREGROUND=0xfffdd3cf        # textActive: #fdd3cf
+export FOREGROUND_DIM=0x99ebaaa4    # text with more opacity for visibility
+export BACKGROUND=0x55c69a8f        # bg: more opaque for better visibility
+export BACKGROUND_ACTIVE=0x99c69a8f # bgActive: much more opaque for active state
+export BACKGROUND_DARKER=0x33c69a8f # Slightly darker for contrast
 
-# General bar colors
-export BAR_COLOR=0xa024273a
-export ICON_COLOR=$WHITE # Color of all icons
-export LABEL_COLOR=$WHITE # Color of all labels
-export BACKGROUND_1=0x903c3e4f
-export BACKGROUND_2=0x90494d64
+# Bar and item colors
+export BAR_COLOR=0x00000000         # Transparent like Waybar
+export ITEM_BG_COLOR=$BACKGROUND
+export ITEM_BG_ACTIVE=$BACKGROUND_ACTIVE
+export ACCENT_COLOR=$FOREGROUND
 
-export POPUP_BACKGROUND_COLOR=0xff24273a
-export POPUP_BORDER_COLOR=$WHITE
+# Workspace colors
+export WORKSPACE_BG=$BACKGROUND
+export WORKSPACE_BG_ACTIVE=0xff0000ff    # BLUE for testing - should be very visible!
+export WORKSPACE_ICON_COLOR=$FOREGROUND_DIM
+export WORKSPACE_ICON_ACTIVE=$FOREGROUND
 
-export SHADOW_COLOR=$BLACK
+# Border and shadow
+export BORDER_COLOR=0x44c69a8f      # Subtle border
+export SHADOW_COLOR=0xA0000000
