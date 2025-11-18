@@ -2,6 +2,6 @@
   "disk": {
     "format": " {percentage_used}%",
     "tooltip": true,
-    "tooltip-format": "Free space: {free} / {total} ({percentage_free}%)"
+    "tooltip-format": "{used} / {total} ({percentage_free}%)"
   }
 }

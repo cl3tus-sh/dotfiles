@@ -2,8 +2,8 @@
   "hyprland/workspaces": {
     "format": "{icon} ",
     "format-icons": {
-      "1": "\uF121",
-      "2": "\uF120",
+      "1": "\uF120",
+      "2": "\uF121",
       "3": "\ueb01",
       "4": "\uea83",
       "5": "\udb83\udede",

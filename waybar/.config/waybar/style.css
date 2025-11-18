@@ -232,3 +232,14 @@ window#waybar {
   font-size: 13px;
   min-width: 24px;
 }
+
+menu {
+  border-radius: 15px;
+  background: #161320;
+  color: #b5e8e0;
+  margin-top: 100px;
+}
+
+menuitem {
+  border-radius: 15px;
+}

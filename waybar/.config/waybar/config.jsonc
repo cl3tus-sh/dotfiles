@@ -12,6 +12,7 @@
       "custom/volume",
       "custom/airpods",
       "custom/mic",
+      "custom/drop",
       "custom/updates",
       "custom/shutdown"
     ],
@@ -27,6 +28,7 @@
       "~/.config/waybar/modules/common-disk.jsonc",
       "~/.config/waybar/modules/custom-temp.jsonc",
       "~/.config/waybar/modules/custom-airpods.jsonc",
+      "~/.config/waybar/modules/custom-drop.jsonc",
       "~/.config/waybar/modules/custom-mic.jsonc"
     ],
     "tray": {
