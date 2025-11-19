@@ -234,12 +234,12 @@ window#waybar {
 }
 
 menu {
-  border-radius: 15px;
+  border-radius: 10px;
   background: #161320;
   color: #b5e8e0;
-  margin-top: 100px;
+  margin-top: 300px;
 }
 
 menuitem {
-  border-radius: 15px;
+  padding: 4px;
 }

@@ -36,8 +36,39 @@ map('n', '<C-l>', '<C-w>l')
 -- Leader key = espace (standard moderne)
 vim.g.mapleader = " "
 
--- Ouvrir un nouveau split
-map('n', '<leader>v', ':vsp<CR>')
-map('n', '<leader>h', ':sp<CR>')
+map('n', '<leader>v', ':vsp<CR>')   -- ouvrire un split vertical
+map('n', '<leader>h', ':sp<CR>')    -- ouvrir un split horizontal
+map('n', '<leader>c', ':close<R>')  -- fermer un split
+map('n', '<leader>d', 'yyp')        -- dupliquer une ligne
+map('n', '<leader>e', ':edit ')     -- ouvrir rapidement un fichier
+map('n', '<leader>s', ':w<CR>')     -- Sauvegarder
+map('n', '<leader>q', ':q<CR>')     -- Sauvegarder
+map('n', '<leader>x', ':bd<CR>')    -- fermer le buffer courrant
 
+-- Deplacer des lignes
+map('n', '<A-j>', ':m .+1<CR>==')   -- deplacer vers le bas 
+map('n', '<A-k>', ':m .-2<CR>==')   -- deplacer vers le haut
+map('v', '<A-j>', ":m '>+1<CR>gv=gv")
+map('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
+-- ======== Plugins ========
+local lazypath = vim.fn.stdpath('config') .. '/lazy/lazy.nvim'
+
+if not vim.loop.fs_stat(lazypath) then
+  print('Installing lazy.nvim...')
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    lazypath,
+  })
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+  spec = {
+    { import = "plugins" },
+  },
+})
