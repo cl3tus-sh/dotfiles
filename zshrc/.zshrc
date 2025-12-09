@@ -38,3 +38,12 @@ export PATH="$HOME/.local/bin:$PATH"
 [[ -f /home/cletus/.dart-cli-completion/zsh-config.zsh ]] && . /home/cletus/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
+export PATH="$HOME/.local/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/cletus/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
