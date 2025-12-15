@@ -20,4 +20,8 @@ vim.keymap.set('n', '<C-k>', 'gg=G')
 vim.keymap.set('n', '<Tab>', ':bnext<CR>');
 vim.keymap.set('n', '<S-Tab>', ':bprev<CR>');
 
+-- Copy to clipboard with Ctrl+c
+vim.keymap.set('v', '<C-c>', '"+y', { desc = 'Copy to clipboard' })
+vim.keymap.set('n', '<C-c>', '"+yy', { desc = 'Copy line to clipboard' })
+
 
