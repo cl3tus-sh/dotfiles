@@ -126,6 +126,14 @@ automatically-unhide-macos-hidden-apps = false
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
+    alt-r = "mode resize"
+
+[mode.resize.binding]
+minus = "resize smart -50"
+shift-equal = "resize smart +50"
+equal = "balance-sizes"
+esc = "mode main"
+enter = "mode main"
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -158,6 +166,7 @@ automatically-unhide-macos-hidden-apps = false
     8 = 'secondary'
     9 = 'secondary' # Music
 
+# aerospace list-apps
 [[on-window-detected]]
     if.app-id = 'com.apple.finder'
     run = 'layout floating'
@@ -177,3 +186,7 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
     if.app-id = 'company.thebrowser.Browser'
     run = ['move-node-to-workspace 3 --focus-follows-window']
+
+[[on-window-detected]]
+    if.app-id = 'app.zen-browser.zen'
+    run = ['move-node-to-workspace 8 --focus-follows-window']
