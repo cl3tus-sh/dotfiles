@@ -2,58 +2,18 @@
 
 set -e
 
-THEME="$1"
-THEME_DIR="$HOME/.config/themes/$THEME"
-THEME_JSON="$THEME_DIR/theme.json"
+# Detect OS and call appropriate script
+OS="$(uname -s)"
 
-if [ -z "$THEME" ]; then
-  echo "Usage: set-theme <theme-name>"
-  exit 1
-fi
-
-if [ ! -f "$THEME_JSON" ]; then
-  echo "Theme '$THEME' not found in $THEME_DIR"
-  exit 1
-fi
-
-# Parse wallpaper paths
-RAW_WP=$(jq -r '.wallpaper' "$THEME_JSON")
-RAW_WP_BLUR=$(jq -r '.wallpaper_blurred' "$THEME_JSON")
-
-# Resolve relative paths
-[[ "$RAW_WP" = /* ]] && WP="$RAW_WP" || WP="$THEME_DIR/$RAW_WP"
-[[ "$RAW_WP_BLUR" = /* ]] && WP_BLUR="$RAW_WP_BLUR" || WP_BLUR="$THEME_DIR/$RAW_WP_BLUR"
-
-# Validate files exist
-if [ ! -f "$WP" ]; then
-  echo "Wallpaper not found: $WP"
-  exit 1
-fi
-
-if [ ! -f "$WP_BLUR" ]; then
-  echo "Blurred wallpaper not found: $WP_BLUR"
-  exit 1
-fi
-
-# --- Update Hyprpaper config ---
-HYPAPER_CFG="$HOME/.config/hypr/hyprpaper.conf"
-cat > "$HYPAPER_CFG" <<EOF
-preload = $WP
-wallpaper = , $WP
-EOF
-
-# Restart Hyprpaper
-pkill hyprpaper 2>/dev/null || true
-nohup hyprpaper >/dev/null 2>&1 &
-
-# --- Update Hyprlock config (only background path) ---
-HYPRLOCK_CFG="$HOME/.config/hypr/hyprlock.conf"
-if [ -f "$HYPRLOCK_CFG" ]; then
-  sed -i "/background {/,/}/ s|path = .*|    path = $WP_BLUR|" "$HYPRLOCK_CFG"
-fi
-
-# Notify user
-notify-send "🌈 Theme Applied" "Switched to theme: $THEME"
-echo "✅ Theme switched to '$THEME'"
-echo "🖼️ Wallpaper: $WP"
-echo "🔒 Lock background: $WP_BLUR"
+case "$OS" in
+  Darwin)
+    exec "$(dirname "$0")/set-theme-macos" "$@"
+    ;;
+  Linux)
+    exec "$(dirname "$0")/set-theme-linux" "$@"
+    ;;
+  *)
+    echo "Unsupported OS: $OS"
+    exit 1
+    ;;
+esac
