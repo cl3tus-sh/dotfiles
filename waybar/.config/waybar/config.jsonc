@@ -2,8 +2,8 @@
   // -*- mode: jsonc -*-
   // Common module definitions to avoid duplication
   {
-    // Center (DP-1)
-    "output": "DP-1",
+    // Center (DP-2)
+    "output": "DP-2",
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": [
