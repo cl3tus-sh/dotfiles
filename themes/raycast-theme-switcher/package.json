@@ -1,0 +1,39 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "theme-switcher",
+  "title": "Theme Switcher",
+  "description": "Switch between system themes with wallpaper preview",
+  "icon": "command-icon.png",
+  "author": "Cl3tus",
+  "categories": [
+    "System"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "switch-theme",
+      "title": "Switch Theme",
+      "description": "Browse and switch system themes",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.83.2",
+    "@raycast/utils": "^1.17.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.11",
+    "@types/node": "20.8.10",
+    "@types/react": "18.3.3",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "build": "ray build -e dist && npm run install-extension",
+    "install-extension": "rm -rf \"$HOME/Library/Application Support/com.raycast.macos/extensions/theme-switcher\" && cp -r dist \"$HOME/Library/Application Support/com.raycast.macos/extensions/theme-switcher\"",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint"
+  }
+}

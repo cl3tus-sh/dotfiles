@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -e
+
+THEME="$1"
+THEME_DIR="$HOME/.config/themes/$THEME"
+THEME_JSON="$THEME_DIR/theme.json"
+
+if [ -z "$THEME" ]; then
+  echo "Usage: set-theme-macos <theme-name>"
+  exit 1
+fi
+
+if [ ! -f "$THEME_JSON" ]; then
+  echo "Theme '$THEME' not found in $THEME_DIR"
+  exit 1
+fi
+
+# Parse wallpaper path
+RAW_WP=$(jq -r '.wallpaper' "$THEME_JSON")
+
+# Resolve relative path
+[[ "$RAW_WP" = /* ]] && WP="$RAW_WP" || WP="$THEME_DIR/$RAW_WP"
+
+# Validate file exists
+if [ ! -f "$WP" ]; then
+  echo "Wallpaper not found: $WP"
+  exit 1
+fi
+
+echo "Setting wallpaper to: $WP"
+
+# Set wallpaper for all screens using AppleScript
+osascript <<EOF
+tell application "System Events"
+  tell every desktop
+    set picture to "$WP"
+  end tell
+end tell
+EOF
+
+echo "✅ Theme switched to '$THEME'"
+echo "🖼️ Wallpaper: $WP"
