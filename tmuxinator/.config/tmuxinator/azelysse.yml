@@ -1,0 +1,19 @@
+name: azelysse
+root: ~/dev/azelysse
+
+windows:
+  - main:
+    panes:
+      - code .
+  - servers:
+      layout: tiled
+      panes:
+        - api:
+            - cd api
+            - pnpm run dev
+        - web:
+            - cd web-tanstack
+            - pnpm run dev
+        - admin:
+            - cd admin
+            - pnpm run dev

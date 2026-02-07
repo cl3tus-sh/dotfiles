@@ -1,0 +1,38 @@
+#!/bin/bash
+# Script to kill tmux session and associated processes
+
+SESSION_NAME="${1:-$(tmux display-message -p '#S')}"
+
+echo "Killing processes for session: $SESSION_NAME"
+
+# Get all panes in the session and their PIDs
+PANE_PIDS=$(tmux list-panes -s -t "$SESSION_NAME" -F '#{pane_pid}' 2>/dev/null)
+
+if [ -z "$PANE_PIDS" ]; then
+    echo "Session not found: $SESSION_NAME"
+    exit 1
+fi
+
+# For each pane PID, find and kill child processes (docker, pnpm, node, etc.)
+for PANE_PID in $PANE_PIDS; do
+    # Find all child processes
+    CHILD_PIDS=$(pgrep -P "$PANE_PID")
+
+    for CHILD_PID in $CHILD_PIDS; do
+        PROC_NAME=$(ps -p "$CHILD_PID" -o comm= 2>/dev/null)
+
+        # Kill docker, pnpm, node processes and their children
+        if [[ "$PROC_NAME" =~ (docker|pnpm|node|npm) ]]; then
+            echo "Killing $PROC_NAME (PID: $CHILD_PID)"
+            pkill -TERM -P "$CHILD_PID" 2>/dev/null  # Kill children first
+            kill -TERM "$CHILD_PID" 2>/dev/null      # Then kill the process
+        fi
+    done
+done
+
+# Wait a moment for processes to terminate
+sleep 0.5
+
+# Kill the tmux session
+tmux kill-session -t "$SESSION_NAME"
+echo "Session $SESSION_NAME killed"

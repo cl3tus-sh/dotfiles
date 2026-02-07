@@ -4,7 +4,14 @@
   {
     // Center (DP-2)
     "output": "DP-2",
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": [
+      "hyprland/workspaces",
+      "custom/media-prev",
+      "custom/media-playpause",
+      "custom/media-next",
+      "custom/media-info",
+      "custom/spotify-launcher",
+    ],
     "modules-center": ["clock"],
     "modules-right": [
       "group/tray-expander",
@@ -14,7 +21,7 @@
       "custom/mic",
       "custom/drop",
       "custom/updates",
-      "custom/shutdown"
+      "custom/shutdown",
     ],
     "include": [
       "~/.config/waybar/modules/common-workspaces.jsonc",
@@ -29,24 +36,25 @@
       "~/.config/waybar/modules/custom-temp.jsonc",
       "~/.config/waybar/modules/custom-airpods.jsonc",
       "~/.config/waybar/modules/custom-drop.jsonc",
-      "~/.config/waybar/modules/custom-mic.jsonc"
+      "~/.config/waybar/modules/custom-mic.jsonc",
+      "~/.config/waybar/modules/common-media.jsonc",
     ],
     "tray": {
       // "icon-size": 21,
-      "spacing": 10
+      "spacing": 10,
     },
     "custom/shutdown": {
       "format": "",
       "interval": "once",
-      "on-click": "wlogout -b 2"
+      "on-click": "wlogout -b 2",
     },
     "network": {
       "format-wifi": "<span foreground='#f5e0dc'>  </span>{essid}",
       "format-ethernet": "<span foreground='#f5e0dc'>󰤭  </span> Ethernet",
       "format-linked": "{ifname} (No IP) ",
       "format-disconnected": "<span foreground='#f5e0dc'>  </span>Disconnected",
-      "tooltip-format-wifi": "Signal Strenght: {signalStrength}%"
-    }
+      "tooltip-format-wifi": "Signal Strenght: {signalStrength}%",
+    },
   },
   {
     // Right (HDMI-A-1)
@@ -57,7 +65,7 @@
       "custom/media-playpause",
       "custom/media-next",
       "custom/media-info",
-      "custom/spotify-launcher"
+      "custom/spotify-launcher",
     ],
     "modules-center": ["clock"],
     "modules-right": ["custom/volume"],
@@ -65,7 +73,7 @@
       "~/.config/waybar/modules/common-workspaces.jsonc",
       "~/.config/waybar/modules/common-clock.jsonc",
       "~/.config/waybar/modules/custom-volume.jsonc",
-      "~/.config/waybar/modules/common-media.jsonc"
-    ]
-  }
+      "~/.config/waybar/modules/common-media.jsonc",
+    ],
+  },
 ]

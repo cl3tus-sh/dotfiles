@@ -38,8 +38,18 @@ fi
 # --- Update Hyprpaper config ---
 HYPAPER_CFG="$HOME/.config/hypr/hyprpaper.conf"
 cat > "$HYPAPER_CFG" <<EOF
-preload = $WP
-wallpaper = , $WP
+# Nouvelle syntaxe hyprpaper (2026)
+wallpaper {
+  monitor = DP-2
+  path = $WP
+  fit_mode = cover
+}
+
+wallpaper {
+  monitor = HDMI-A-1
+  path = $WP
+  fit_mode = cover
+}
 EOF
 
 # Restart Hyprpaper
