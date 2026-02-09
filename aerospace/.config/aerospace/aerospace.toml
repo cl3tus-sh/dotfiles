@@ -179,6 +179,10 @@ enter = "mode main"
     run = 'layout tiling'
 
 [[on-window-detected]]
+    if.app-id = 'net.kovidgoyal.kitty'
+    run = ['move-node-to-workspace 1 --focus-follows-window']
+
+[[on-window-detected]]
     if.app-id = 'com.microsoft.VSCode'
     run = ['move-node-to-workspace 2 --focus-follows-window']
 
@@ -187,5 +191,17 @@ enter = "mode main"
     run = ['move-node-to-workspace 3 --focus-follows-window']
 
 [[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = ['move-node-to-workspace 7 --focus-follows-window']
+
+[[on-window-detected]]
+    if.app-id = 'com.hnc.Discord'
+    run = ['move-node-to-workspace 7 --focus-follows-window']
+
+[[on-window-detected]]
     if.app-id = 'app.zen-browser.zen'
     run = ['move-node-to-workspace 8 --focus-follows-window']
+
+[[on-window-detected]]
+    if.app-id = 'com.spotify.client'
+    run = ['move-node-to-workspace 9 --focus-follows-window']
