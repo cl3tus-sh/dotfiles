@@ -9,9 +9,8 @@ after-startup-command = [
 ]
 
 # Notify Sketchybar about workspace change
-exec-on-workspace-change = ['/bin/bash', '-c',
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
-  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=0'
+exec-on-workspace-change = [
+  '/Users/clement.osternaud/.config/sketchybar/plugins/aerospace_update_all.sh'
 ]
 
 # Start AeroSpace at login
@@ -93,34 +92,34 @@ automatically-unhide-macos-hidden-apps = false
     alt-equal = 'resize smart +50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
-    alt-5 = 'workspace 5'
-    alt-6 = 'workspace 6'
-    alt-7 = 'workspace 7'
-    alt-8 = 'workspace 8'
-    alt-9 = 'workspace 9'
+    alt-1 = ['workspace 1', 'exec-and-forget sketchybar --trigger force_update']
+    alt-2 = ['workspace 2', 'exec-and-forget sketchybar --trigger force_update']
+    alt-3 = ['workspace 3', 'exec-and-forget sketchybar --trigger force_update']
+    alt-4 = ['workspace 4', 'exec-and-forget sketchybar --trigger force_update']
+    alt-5 = ['workspace 5', 'exec-and-forget sketchybar --trigger force_update']
+    alt-6 = ['workspace 6', 'exec-and-forget sketchybar --trigger force_update']
+    alt-7 = ['workspace 7', 'exec-and-forget sketchybar --trigger force_update']
+    alt-8 = ['workspace 8', 'exec-and-forget sketchybar --trigger force_update']
+    alt-9 = ['workspace 9', 'exec-and-forget sketchybar --trigger force_update']
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-    alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
-    alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
-    alt-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
-    alt-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
-    alt-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
-    alt-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
-    alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
-    alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
-    alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
+    alt-shift-1 = ['move-node-to-workspace 1 --focus-follows-window', 'exec-and-forget sketchybar --trigger force_update']
+    alt-shift-2 = ['move-node-to-workspace 2 --focus-follows-window', 'exec-and-forget sketchybar --trigger force_update']
+    alt-shift-3 = ['move-node-to-workspace 3 --focus-follows-window', 'exec-and-forget sketchybar --trigger force_update']
+    alt-shift-4 = ['move-node-to-workspace 4 --focus-follows-window', 'exec-and-forget sketchybar --trigger force_update']
+    alt-shift-5 = ['move-node-to-workspace 5 --focus-follows-window', 'exec-and-forget sketchybar --trigger force_update']
+    alt-shift-6 = ['move-node-to-workspace 6 --focus-follows-window', 'exec-and-forget sketchybar --trigger force_update']
+    alt-shift-7 = ['move-node-to-workspace 7 --focus-follows-window', 'exec-and-forget sketchybar --trigger force_update']
+    alt-shift-8 = ['move-node-to-workspace 8 --focus-follows-window', 'exec-and-forget sketchybar --trigger force_update']
+    alt-shift-9 = ['move-node-to-workspace 9 --focus-follows-window', 'exec-and-forget sketchybar --trigger force_update']
 
     # Go to previous workspace (with wrap‑around)
-    ctrl-alt-left = 'workspace --wrap-around prev'
+    ctrl-alt-left = ['workspace --wrap-around prev', 'exec-and-forget sketchybar --trigger force_update']
     # Go to next workspace (with wrap‑around)
-    ctrl-alt-right = 'workspace --wrap-around next'
+    ctrl-alt-right = ['workspace --wrap-around next', 'exec-and-forget sketchybar --trigger force_update']
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-    alt-tab = 'workspace-back-and-forth'
+    alt-tab = ['workspace-back-and-forth', 'exec-and-forget sketchybar --trigger force_update']
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 

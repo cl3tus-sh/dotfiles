@@ -53,44 +53,42 @@ WORKSPACE_ICONS=(
   ""  # 1: terminal
   ""  # 2: code
   ""  # 3: browser
-  ""   # 4: other
-  ""   # 5: social/media
-  ""   # 6: files
+  ""   # 4: other
+  ""   # 5: social/media
+  ""   # 6: files
   "󰻞"  # 7: chat/communication
   ""  # 8: browser
   "󰝚"  # 9: music
 )
 
-# Add workspaces for all monitors (only non-empty ones)
-for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-screens-id}"); do
-  for sid in $(aerospace list-workspaces --monitor "$monitor" --empty no); do
-    # Determine which display this workspace should be shown on
-    display_id="1"
-    if [ "$sid" -ge 7 ] && [ "$sid" -le 10 ]; then
-      display_id="2"
-    fi
+# Add all workspaces (1-9)
+for sid in {1..9}; do
+  # Determine which display this workspace should be shown on
+  display_id="1"
+  if [ "$sid" -ge 6 ] && [ "$sid" -le 10 ]; then
+    display_id="2"
+  fi
 
-    # Get the icon for this workspace (array is 0-indexed, workspace IDs start at 1)
-    workspace_icon="${WORKSPACE_ICONS[$((sid-1))]}"
+  # Get the icon for this workspace (array is 0-indexed, workspace IDs start at 1)
+  workspace_icon="${WORKSPACE_ICONS[$((sid-1))]}"
 
-    sketchybar --add item space.$sid left \
-      --set space.$sid \
-      display="$display_id" \
-      icon="$workspace_icon" \
-      icon.font="JetBrainsMono Nerd Font:Bold:16.0" \
-      icon.color=$WHITE \
-      icon.padding_left=12 \
-      icon.padding_right=12 \
-      label.drawing=off \
-      padding_left=2 \
-      padding_right=2 \
-      background.color=$WORKSPACE_BG \
-      background.corner_radius=4 \
-      background.height=28 \
-      background.border_width=0 \
-      background.drawing=on \
-      click_script="aerospace workspace $sid"
-  done
+  sketchybar --add item space.$sid left \
+    --set space.$sid \
+    display="$display_id" \
+    icon="$workspace_icon" \
+    icon.font="JetBrainsMono Nerd Font:Bold:16.0" \
+    icon.color=$WHITE \
+    icon.padding_left=12 \
+    icon.padding_right=12 \
+    label.drawing=off \
+    padding_left=2 \
+    padding_right=2 \
+    background.color=$WORKSPACE_BG \
+    background.corner_radius=4 \
+    background.height=28 \
+    background.border_width=0 \
+    background.drawing=on \
+    click_script="aerospace workspace $sid"
 done
 
 #front app
@@ -115,7 +113,19 @@ sketchybar --add item clock right \
   --subscribe volume volume_change \
   --add item battery right \
   --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-  --subscribe battery system_woke power_source_change 
+  --subscribe battery system_woke power_source_change \
+  --add item media right \
+  --set media update_freq=2 script="$PLUGIN_DIR/media.sh" 
+
+##### Workspace monitoring #####
+# Add a hidden item that polls for workspace changes every second (fallback)
+# and responds instantly to force_update triggers from AeroSpace keybindings
+sketchybar --add item aerospace_monitor left \
+  --set aerospace_monitor \
+  update_freq=1 \
+  script="$PLUGIN_DIR/aerospace_update_all.sh" \
+  drawing=off \
+  --subscribe aerospace_monitor force_update
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
