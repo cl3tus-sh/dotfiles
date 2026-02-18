@@ -16,7 +16,7 @@ export ACCENT_COLOR=$FOREGROUND
 
 # Workspace colors
 export WORKSPACE_BG=0x22c69a8f               # Workspace inactif: très transparent
-export WORKSPACE_BG_ACTIVE=0xffc69a8f        # Workspace actif: complètement opaque
+export WORKSPACE_BG_ACTIVE=0xffca9ee6        # Workspace actif: complètement opaque
 export WORKSPACE_ICON_COLOR=$FOREGROUND_DIM
 export WORKSPACE_ICON_ACTIVE=$FOREGROUND
 
