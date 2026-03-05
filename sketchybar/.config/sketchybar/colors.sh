@@ -1,25 +1,11 @@
 #!/bin/bash
 
-# Base colors inspired by Waybar config
 export WHITE=0xffffffff
-export FOREGROUND=0xfffdd3cf        # textActive: #fdd3cf
-export FOREGROUND_DIM=0x99ebaaa4    # text with more opacity for visibility
-export BACKGROUND=0x55c69a8f        # bg: more opaque for better visibility
-export BACKGROUND_ACTIVE=0x99c69a8f # bgActive: much more opaque for active state
-export BACKGROUND_DARKER=0x33c69a8f # Slightly darker for contrast
+export BG=0x651e1e2e
+export BORDER_COLOR=0x44c69a8f
 
-# Bar and item colors
-export BAR_COLOR=0x00000000         # Transparent like Waybar
-export ITEM_BG_COLOR=$BACKGROUND
-export ITEM_BG_ACTIVE=$BACKGROUND_ACTIVE
-export ACCENT_COLOR=$FOREGROUND
-
-# Workspace colors
-export WORKSPACE_BG=0x22c69a8f               # Workspace inactif: très transparent
-export WORKSPACE_BG_ACTIVE=0xffca9ee6        # Workspace actif: complètement opaque
-export WORKSPACE_ICON_COLOR=$FOREGROUND_DIM
-export WORKSPACE_ICON_ACTIVE=$FOREGROUND
-
-# Border and shadow
-export BORDER_COLOR=0x44c69a8f      # Subtle border
-export SHADOW_COLOR=0xA0000000
+export WORKSPACE_BG=0x22c69a8f
+export WORKSPACE_ICON_COLOR=$WHITE
+export WORKSPACE_ICON_ACTIVE=0xffca9ee6
+export WORKSPACE_BORDER_COLOR=0x44c69a8f
+export WORKSPACE_BORDER_ACTIVE=0xffca9ee6

@@ -11,14 +11,14 @@ FOCUSED=$(/usr/local/bin/aerospace list-workspaces --focused)
 # Update all 9 workspaces directly
 for sid in {1..9}; do
   if [ "$sid" = "$FOCUSED" ]; then
-    # Active workspace
+    # Active workspace - bordure colorée + icône accent
     sketchybar --set space.$sid \
-      background.color=$WORKSPACE_BG_ACTIVE \
-      icon.color=$WHITE
+      background.border_color=$WORKSPACE_BORDER_ACTIVE \
+      icon.color=$WORKSPACE_ICON_ACTIVE
   else
-    # Inactive workspace
+    # Inactive workspace - bordure subtile + icône dim
     sketchybar --set space.$sid \
-      background.color=$WORKSPACE_BG \
-      icon.color=$WHITE
+      background.border_color=$WORKSPACE_BORDER_COLOR \
+      icon.color=$WORKSPACE_ICON_COLOR
   fi
 done

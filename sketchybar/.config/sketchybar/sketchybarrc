@@ -1,54 +1,53 @@
-# A simple sketchybar config for aerospace users to get started with
-# Not too different from the base starting config!
-
 PLUGIN_DIR="$CONFIG_DIR/plugins"
-ITEM_DIR="$CONFIG_DIR/items" 
+source "$CONFIG_DIR/colors.sh"
 
-#### Import Colors
-source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+FONT="JetBrainsMono Nerd Font"
+GAP=6
 
-##### Bar Appearance #####
-# Configuring the general appearance of the bar.
-# Inspired by Waybar style with transparent background and rounded items
-
+##### Bar #####
 sketchybar --bar position=top \
-  height=36 \
-  margin=4 \
+  height=38 \
+  margin=10 \
   y_offset=4 \
-  color=$BAR_COLOR \
-  shadow=off \
-  blur_radius=0 \
-  padding_left=8 \
-  padding_right=8
+  corner_radius=6 \
+  blur_radius=5 \
+  padding_left=10 \
+  padding_right=10 \
+  color=$BG \
+  border_width=1 border_color=0x28222222 \
+  shadow.color=0x28000000 shadow.angle=0
 
-##### Changing Defaults #####
-# We now change some default values, which are applied to all further items.
-# For a full list of all available item properties see:
-# https://felixkratz.github.io/SketchyBar/config/items
-
+##### Defaults #####
 default=(
   padding_left=2
   padding_right=2
-  icon.font="JetBrainsMono Nerd Font:Bold:16.0"
-  label.font="JetBrainsMono Nerd Font:Bold:14.0"
+  icon.font="$FONT:Bold:16.0"
+  label.font="$FONT:Bold:14.0"
   icon.color=$WHITE
   label.color=$WHITE
-  icon.padding_left=8
-  icon.padding_right=8
-  label.padding_left=6
-  label.padding_right=10
-  background.color=$ITEM_BG_COLOR
-  background.corner_radius=8
+  icon.padding_left=6
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=6
+  background.color=$WORKSPACE_BG
+  background.corner_radius=4
   background.height=28
-  background.border_width=1
+  background.border_width=2
   background.border_color=$BORDER_COLOR
   updates=on
 )
 sketchybar --default "${default[@]}"
 
-##### Adding aeropsace layouts #####
+##### Left — OS icon #####
+sketchybar --add item os left \
+  --set os \
+  icon= icon.color=0xfff5c2e7 \
+  icon.font.size=21 icon.y_offset=2 \
+  icon.padding_left=0 icon.padding_right=0 \
+  label.padding_left=0 label.padding_right=6 \
+  background.drawing=off
 
-# Define static icons for each workspace (Nerd Font icons)
+##### Left — Workspaces #####
 WORKSPACE_ICONS=(
   ""  # 1: terminal
   ""  # 2: code
@@ -61,71 +60,102 @@ WORKSPACE_ICONS=(
   "󰝚"  # 9: music
 )
 
-# Add all workspaces (1-9)
 for sid in {1..9}; do
-  # Determine which display this workspace should be shown on
   display_id="1"
   if [ "$sid" -ge 6 ] && [ "$sid" -le 10 ]; then
     display_id="2"
   fi
 
-  # Get the icon for this workspace (array is 0-indexed, workspace IDs start at 1)
-  workspace_icon="${WORKSPACE_ICONS[$((sid-1))]}"
-
   sketchybar --add item space.$sid left \
     --set space.$sid \
     display="$display_id" \
-    icon="$workspace_icon" \
-    icon.font="JetBrainsMono Nerd Font:Bold:16.0" \
-    icon.color=$WHITE \
-    icon.padding_left=12 \
-    icon.padding_right=12 \
+    icon="${WORKSPACE_ICONS[$((sid-1))]}" \
+    icon.padding_left=12 icon.padding_right=12 \
     label.drawing=off \
-    padding_left=2 \
-    padding_right=2 \
-    background.color=$WORKSPACE_BG \
-    background.corner_radius=4 \
-    background.height=28 \
-    background.border_width=0 \
-    background.drawing=on \
+    background.border_color=$WORKSPACE_BORDER_COLOR \
     click_script="aerospace workspace $sid"
 done
 
-#front app
-# source "$ITEM_DIR/front_app.sh"
-
-
-##### Adding Right Items #####
-# In the same way as the left items we can add items to the right side.
-# Additional position (e.g. center) are available, see:
-# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
-
-# Some items refresh on a fixed cycle, e.g. the clock runs its script once
-# every 10s. Other gititems respond to events they subscribe to, e.g. the
-# volume.sh script is only executed once an actual change in system audio
-# volume is registered. More info about the event system can be found here:
-# https://felixkratz.github.io/SketchyBar/config/events
-
-sketchybar --add item clock right \
-  --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
-  --add item volume right \
-  --set volume script="$PLUGIN_DIR/volume.sh" \
-  --subscribe volume volume_change \
-  --add item battery right \
-  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-  --subscribe battery system_woke power_source_change \
-  --add item media right \
-  --set media update_freq=2 script="$PLUGIN_DIR/media.sh" 
-
-##### Workspace monitoring #####
-# Add a hidden item that polls for workspace changes every second (fallback)
-# and responds instantly to force_update triggers from AeroSpace keybindings
+##### Left — Workspace monitor (hidden, polls aerospace) #####
 sketchybar --add item aerospace_monitor left \
   --set aerospace_monitor \
   update_freq=1 \
-  script="$PLUGIN_DIR/aerospace_update_all.sh" \
   drawing=off \
+  script="$PLUGIN_DIR/aerospace_update_all.sh" \
   --subscribe aerospace_monitor force_update
 
-##### Force all scripts to run the first time (never do this in a script) #####
+##### Right — Clock / Volume / Battery #####
+sketchybar --add item clock right \
+  --set clock \
+  update_freq=10 \
+  script="$PLUGIN_DIR/clock.sh"
+
+sketchybar --add item volume right \
+  --set volume \
+  script="$PLUGIN_DIR/volume.sh" \
+  --subscribe volume volume_change
+
+sketchybar --add item battery right \
+  --set battery \
+  update_freq=120 \
+  script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change
+
+##### Right — CPU / RAM #####
+sketchybar --add item cpu right \
+  --set cpu \
+  update_freq=5 \
+  script="$PLUGIN_DIR/cpu.sh"
+
+sketchybar --add item ram right \
+  --set ram \
+  update_freq=5 \
+  script="$PLUGIN_DIR/ram.sh"
+
+##### Right — Spotify #####
+SPOTIFY_ICON_SIZE=19
+SPOTIFY_CTRL_PAD=6
+
+# Common properties for spotify control buttons
+spotify_ctrl=(
+  icon.padding_left=$SPOTIFY_CTRL_PAD
+  icon.padding_right=$SPOTIFY_CTRL_PAD
+  label.drawing=off
+  padding_left=0
+  padding_right=0
+  background.drawing=off
+  script="$PLUGIN_DIR/spotify.sh"
+)
+
+sketchybar --add event spotify_change com.spotify.client.PlaybackStateChanged
+
+sketchybar --add item spotify right \
+  --set spotify \
+  icon.padding_right=$GAP \
+  label.padding_left=$GAP \
+  update_freq=15 \
+  script="$PLUGIN_DIR/spotify.sh" \
+  --subscribe spotify spotify_change mouse.clicked
+
+sketchybar --add item spotify.next right \
+  --set spotify.next icon=󰒭 icon.font.size=$SPOTIFY_ICON_SIZE \
+  "${spotify_ctrl[@]}" \
+  --subscribe spotify.next mouse.clicked
+
+sketchybar --add item spotify.playpause right \
+  --set spotify.playpause icon= icon.font.size=12 icon.y_offset=1 \
+  "${spotify_ctrl[@]}" \
+  --subscribe spotify.playpause mouse.clicked
+
+sketchybar --add item spotify.back right \
+  --set spotify.back icon=󰒮 icon.font.size=$SPOTIFY_ICON_SIZE \
+  "${spotify_ctrl[@]}" \
+  --subscribe spotify.back mouse.clicked
+
+sketchybar --add bracket spotify_controls \
+  spotify.next spotify.playpause spotify.back \
+  --set spotify_controls \
+  background.drawing=on
+
+##### Init #####
 sketchybar --update
