@@ -2,7 +2,7 @@
   // -*- mode: jsonc -*-
   // Common module definitions to avoid duplication
   {
-    // Center (DP-2)
+    // (DP-2)
     "output": "DP-2",
     "modules-left": [
       "hyprland/workspaces",
@@ -14,7 +14,10 @@
     ],
     "modules-center": ["clock"],
     "modules-right": [
-      "group/tray-expander",
+      "network",
+      "bluetooth",
+      "disk",
+      "custom/temps",
       "custom/notifications",
       "custom/volume",
       "custom/airpods",
@@ -25,7 +28,6 @@
     "include": [
       "~/.config/waybar/modules/common-workspaces.jsonc",
       "~/.config/waybar/modules/common-clock.jsonc",
-      "~/.config/waybar/modules/group-tray-expander.jsonc",
       "~/.config/waybar/modules/custom-volume.jsonc",
       "~/.config/waybar/modules/common-media.jsonc",
       "~/.config/waybar/modules/common-notification.jsonc",
@@ -48,15 +50,17 @@
       "on-click": "wlogout -b 2",
     },
     "network": {
-      "format-wifi": "<span foreground='#f5e0dc'>  </span>{essid}",
-      "format-ethernet": "<span foreground='#f5e0dc'>󰤭  </span> Ethernet",
-      "format-linked": "{ifname} (No IP) ",
-      "format-disconnected": "<span foreground='#f5e0dc'>  </span>Disconnected",
-      "tooltip-format-wifi": "Signal Strenght: {signalStrength}%",
+      "interval": 1,
+      "format-wifi": "<span foreground='#f5e0dc'>  </span>{essid} 󰁝{bandwidthUpBits} 󰁅{bandwidthDownBits}",
+      "format-ethernet": "<span foreground='#f5e0dc'>󰤭  </span>󰁝{bandwidthUpBits} 󰁅{bandwidthDownBits}",
+      "format-linked": "{ifname} (No IP) ",
+      "format-disconnected": "<span foreground='#f5e0dc'>  </span>Disconnected",
+      "tooltip-format-wifi": "Signal Strength: {signalStrength}% | {ifname}\n󰁝 {bandwidthUpBits}  󰁅 {bandwidthDownBits}",
+      "tooltip-format-ethernet": "{ifname}\n󰁝 {bandwidthUpBits}  󰁅 {bandwidthDownBits}",
     },
   },
   {
-    // Right (HDMI-A-1)
+    // (HDMI-A-1)
     "output": "HDMI-A-1",
     "modules-left": [
       "hyprland/workspaces",
